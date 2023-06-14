@@ -3,3 +3,7 @@
 -unpress all keys when alt tabbed, (reset to init state)
 
 - change render of special keys to render symbols instead of text
+
+- fix return condition
+
+- fix redundant onkeyDown
