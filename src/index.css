@@ -60,6 +60,27 @@ body {
   background-color: lightgreen;
 }
 
+.special-key-wrapper{
+  width: 1em;
+  height: 1em;
+}
 .special-key-Space{
   min-width: 12em;
+}
+
+.special-key-CapsLock{
+  width: 4em;
+}
+
+.special-key-Tab{
+  width: 3em;
+}
+
+.special-key-Backspace{
+  width: 3em;
+}
+
+
+[class*="special-key-Shift"]{
+  width: 4em;
 }
