@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Key from "./key.jsx";
+import Key from "./Key.jsx";
 const KeyBoardRow = (props) => {
     console.log('breakpoint 2')
     console.log(props)
