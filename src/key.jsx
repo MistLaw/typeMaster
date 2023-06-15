@@ -9,6 +9,8 @@ import ShiftLeft from '../assets/special_keys_icons/ShiftLeft.svg'
 import ShiftRight from '../assets/special_keys_icons/ShiftRight.svg'
 import Space from '../assets/special_keys_icons/Space.svg'
 import Tab from '../assets/special_keys_icons/Tab.svg'
+import AltLeft from '../assets/special_keys_icons/AltLeft.svg'
+import AltRight from '../assets/special_keys_icons/AltRight.svg'
 
 const Key = (props) => {
 
@@ -19,6 +21,8 @@ const Key = (props) => {
 
     
     const special_keys_icons={
+        "AltLeft" : AltLeft,
+        "AltRight" : AltRight,
         "Backspace" : Backspace,
         "CapsLock" : CapsLock,
         "ControlLeft" : ControlLeft,
@@ -62,7 +66,7 @@ const Key = (props) => {
         //TODO include the keycodes check as well when trying to add the special-key class
         <div className={"key"+ (isDown? " active" : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
-            ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]} style={{"height": "100%", "width": "100%"}}/> </div>
+            ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>
             : props.keychar) }
         </div>
     );

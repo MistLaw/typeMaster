@@ -6,3 +6,5 @@
 - fix return condition
 
 - fix redundant onkeyDown
+
+- fix svg top bottom placement

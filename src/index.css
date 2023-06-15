@@ -60,7 +60,17 @@ body {
   background-color: lightgreen;
 }
 
+[class*='special-key']{
+  min-width: 2em;
+
+}
+
+.special-key-wrapper > *{
+  height: 100%;
+  width: 100%;
+}
 .special-key-wrapper{
+  float: left;
   width: 1em;
   height: 1em;
 }
