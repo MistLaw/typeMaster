@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from "react";
-import Backspace from '../assets/special_keys_icons/Backspace.svg'
-import CapsLock from '../assets/special_keys_icons/CapsLock.svg'
-import ControlLeft from '../assets/special_keys_icons/ControlLeft.svg'
-import ControlRight from '../assets/special_keys_icons/ControlRight.svg'
-import Enter from '../assets/special_keys_icons/Enter.svg'
-import MetaLeft from '../assets/special_keys_icons/MetaLeft.svg'
-import ShiftLeft from '../assets/special_keys_icons/ShiftLeft.svg'
-import ShiftRight from '../assets/special_keys_icons/ShiftRight.svg'
-import Space from '../assets/special_keys_icons/Space.svg'
-import Tab from '../assets/special_keys_icons/Tab.svg'
-import AltLeft from '../assets/special_keys_icons/AltLeft.svg'
-import AltRight from '../assets/special_keys_icons/AltRight.svg'
+import Backspace from '../../assets/special_keys_icons/Backspace.svg'
+import CapsLock from '../../assets/special_keys_icons/CapsLock.svg'
+import ControlLeft from '../../assets/special_keys_icons/ControlLeft.svg'
+import ControlRight from '../../assets/special_keys_icons/ControlRight.svg'
+import Enter from '../../assets/special_keys_icons/Enter.svg'
+import MetaLeft from '../../assets/special_keys_icons/MetaLeft.svg'
+import ShiftLeft from '../../assets/special_keys_icons/ShiftLeft.svg'
+import ShiftRight from '../../assets/special_keys_icons/ShiftRight.svg'
+import Space from '../../assets/special_keys_icons/Space.svg'
+import Tab from '../../assets/special_keys_icons/Tab.svg'
+import AltLeft from '../../assets/special_keys_icons/AltLeft.svg'
+import AltRight from '../../assets/special_keys_icons/AltRight.svg'
 
 const Key = (props) => {
 

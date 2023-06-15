@@ -1,7 +1,7 @@
 
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import KeyBoard from './KeyBoard.jsx'
+import KeyBoard from './components/KeyBoard.jsx'
 
 /*
 function render() {
