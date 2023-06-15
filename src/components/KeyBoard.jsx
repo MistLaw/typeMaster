@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import KeyBoardRow from './KeyBoardRow.jsx'
+import '../styles/keyboard.css'
 
 const KeyBoard = () => {
     

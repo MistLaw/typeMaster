@@ -1,7 +1,12 @@
 
-import React, { StrictMode } from "react";
+import React, { Children, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import KeyBoard from './components/KeyBoard.jsx'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import Root from "./routes/Root.jsx"
+import MainMenu from "./components/MainMenu.jsx";
+import Practice from "./routes/practice.jsx";
+import Tutorial from "./routes/Tutorial.jsx";
 
 /*
 function render() {
@@ -11,9 +16,24 @@ function render() {
 render();
 */
 
+const router = createBrowserRouter([
+  {
+    path: "/main_window",
+    element: <Root/>
+  },
+  {
+    path: "/practice",
+    element: <Practice/>
+  },
+  {
+    path: "/tutorial",
+    element: <Tutorial/>
+  },
+])
+
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <KeyBoard />
+    <RouterProvider router = {router}/>
   </StrictMode>
 );

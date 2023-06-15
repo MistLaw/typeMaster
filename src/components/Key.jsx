@@ -12,6 +12,8 @@ import Tab from '../../assets/special_keys_icons/Tab.svg'
 import AltLeft from '../../assets/special_keys_icons/AltLeft.svg'
 import AltRight from '../../assets/special_keys_icons/AltRight.svg'
 
+import '../styles/keyboard.css'
+
 const Key = (props) => {
 
     const [isDown, setIsDown] = useState(false)

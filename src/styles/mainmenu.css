@@ -1,0 +1,34 @@
+:root {
+    box-sizing: border-box;
+  }
+  
+  *,
+  ::before,
+  ::after {
+    box-sizing: inherit;
+  }
+  
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+      Arial, sans-serif;
+    margin: auto;
+    padding: 2rem;
+  }
+
+  .MAIN-MENU{
+    display: flex;
+    flex-direction: column;
+    background-color: brown;
+    width: 80%;
+    margin: 1em auto;
+  }
+  
+
+  .MENU-ITEM{
+    text-decoration: inherit;
+    color: inherit;
+    width: 60%;
+    margin: 1em auto;
+    background-color: blueviolet;
+  }
