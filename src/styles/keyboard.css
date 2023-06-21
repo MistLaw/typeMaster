@@ -20,9 +20,9 @@
   
   .keyboard {
     display: flex;
-    margin: auto;
     flex-direction: column;
-    width: 80%;
+    width: fit-content;
+    margin: auto;
   }
   
   .keyboardrow{
@@ -60,13 +60,6 @@
     color: yellow;
   }
 
-  .correct{
-    background-color: lightgreen;
-  }
-
-  .incorrect{
-    background-color: lightcoral;
-  }
   
   [class*='special-key']{
     min-width: 2em;

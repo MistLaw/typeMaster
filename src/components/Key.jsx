@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import { GeneratedCharContext } from "./GeneratedCharContext.jsx";
+import { PracticePageContext } from "./PracticePageContext.jsx";
 // svg assets
 import Backspace from '../../assets/special_keys_icons/Backspace.svg'
 import CapsLock from '../../assets/special_keys_icons/CapsLock.svg'
@@ -42,7 +42,7 @@ const Key = (props) => {
         "Tab" : Tab,
     }
 
-    const generatedChar = useContext(GeneratedCharContext)
+    const {generatedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
 
     
     useEffect(()=>{
@@ -61,9 +61,11 @@ const Key = (props) => {
                 setIsDown(isDown => true)
                 if(props.keychar === generatedChar){
                     setIsCorrect(true)
+                    setLastKeyPressIsCorrect(true)
                 }
                 else{
                     setIsCorrect(false)
+                    setLastKeyPressIsCorrect(false)
                 }
             }
 

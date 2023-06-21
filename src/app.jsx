@@ -20,7 +20,7 @@ render();
 const router = createBrowserRouter([
   {
     path: "/main_window",
-    element: <Root/>
+    element: <Practice/>
   },
   {
     path: "/practice",

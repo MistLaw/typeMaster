@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, createContext } from 'react';
-import { GeneratedCharContext } from '../components/GeneratedCharContext.jsx';
+import { PracticePageContext } from '../components/PracticePageContext.jsx';
 import KeyBoard from '../components/KeyBoard.jsx';
 import { Link } from 'react-router-dom';
 
@@ -13,14 +13,22 @@ function Practice() {
     .flat(1);
 
     const [generatedChar, setGeneratedChar] = useState(possible_chars[Math.floor(Math.random() * possible_chars.length)])
-
+    const [lastKeyPressIsCorrect, setLastKeyPressIsCorrect] = useState(null)
     return (
         <div className="main">
             <Link className='BACK-MAIN-MENU' to={'/main_window'}>Back to Main Menu</Link>
-            <div className="generated-char"> <p>{generatedChar}</p> </div>
-            <GeneratedCharContext.Provider value={generatedChar}>
-                <KeyBoard/>
-            </GeneratedCharContext.Provider>
+            <div className='generted-char-wrapper'>
+                <PracticePageContext.Provider value={{generatedChar, setLastKeyPressIsCorrect}}>
+                        {
+                            lastKeyPressIsCorrect === null 
+                            ? <p className='keypress-feedback'>Press the key below !</p>
+                            : lastKeyPressIsCorrect ?  <p className='keypress-feedback correct'>Great !</p>
+                            : <p className='keypress-feedback incorrect'>Try again !</p>
+                        }
+                    <div className="generated-char"> <p>{generatedChar}</p> </div>
+                    <KeyBoard/>
+                </PracticePageContext.Provider>
+            </div>
         </div>
     );
 }

@@ -53,11 +53,19 @@ const handleKeyDown= (e) => {
     if(e.code ==='ShiftLeft'){
         setShiftIsDown(shiftIsDown => true)
     }
+
+    if(e.code ==='ShiftRight'){
+        setShiftIsDown(shiftIsDown => true)
+    }
 }
 
 const handleKeyUp= (e) => {
 
     if(e.code ==='ShiftLeft'){
+        setShiftIsDown(shiftIsDown => false)
+    }
+
+    if(e.code ==='ShiftRight'){
         setShiftIsDown(shiftIsDown => false)
     }
 }
