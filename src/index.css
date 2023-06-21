@@ -1,0 +1,40 @@
+:root {
+    box-sizing: border-box;
+  }
+  
+  *,
+  ::before,
+  ::after {
+    box-sizing: inherit;
+  }
+  
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+      Arial, sans-serif;
+    margin: auto;
+    padding: 2rem;
+  }
+  
+
+
+.main{
+    width: 80%;
+    margin: auto;
+}
+
+.generated-char {
+    width: 80%;
+    margin: auto;
+}
+
+.generated-char > p{
+    width: 2em;
+    height: 2em;
+    background-color: gray;
+    border: 2px;
+    border-color: black;
+    border-radius: .75em;
+    text-align: center;
+    vertical-align: middle;
+}

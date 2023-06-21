@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import { GeneratedCharContext } from "./GeneratedCharContext.jsx";
+// svg assets
 import Backspace from '../../assets/special_keys_icons/Backspace.svg'
 import CapsLock from '../../assets/special_keys_icons/CapsLock.svg'
 import ControlLeft from '../../assets/special_keys_icons/ControlLeft.svg'
@@ -12,11 +14,14 @@ import Tab from '../../assets/special_keys_icons/Tab.svg'
 import AltLeft from '../../assets/special_keys_icons/AltLeft.svg'
 import AltRight from '../../assets/special_keys_icons/AltRight.svg'
 
+// style
 import '../styles/keyboard.css'
 
 const Key = (props) => {
 
     const [isDown, setIsDown] = useState(false)
+    const [isCorrect, setIsCorrect] = useState(false)
+
     const special_keys = window.keyboard_layouts.ISO["special_keys_first"].flat(1)
                    .concat(window.keyboard_layouts.ISO["special_keys_last"]).flat(1)
                    .concat(window.keyboard_layouts.ISO["last_row"])
@@ -37,6 +42,8 @@ const Key = (props) => {
         "Tab" : Tab,
     }
 
+    const generatedChar = useContext(GeneratedCharContext)
+
     
     useEffect(()=>{
         window.addEventListener('keydown', handleKeyDown)
@@ -46,11 +53,20 @@ const Key = (props) => {
 
 
     const handleKeyDown= (event)=>{
+
+
         if(event.key === props.keychar || event.code === props.keychar){
             console.log('event down localy recognized with key = ', props.keychar)
             if(! isDown){
                 setIsDown(isDown => true)
+                if(props.keychar === generatedChar){
+                    setIsCorrect(true)
+                }
+                else{
+                    setIsCorrect(false)
+                }
             }
+
         }
     }
 
@@ -66,7 +82,7 @@ const Key = (props) => {
     return (
 
         //TODO include the keycodes check as well when trying to add the special-key class
-        <div className={"key"+ (isDown? " active" : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
+        <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
             ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>
             : props.keychar) }

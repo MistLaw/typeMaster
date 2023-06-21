@@ -9,6 +9,7 @@ const KeyBoard = () => {
     const [loading, setLoading] = useState(true)
     
     // TODO: instead of assuming initial false, check if the system has it enabled or not, most likely using a library
+    //TODO center the inner components of Keyboard, the outer div gets centered fine but the keys dont
     // ISSUE: the characters key event generate dont take into account wether caps lock is on
     // maybe store both normal and alt values in the same component
     const [capsLock, setCapsLock] = useState(false)
@@ -41,12 +42,10 @@ const KeyBoard = () => {
     setRowsAlt(rows_alt => rows_alt.concat([window.keyboard_layouts.ISO["last_row"]]))
 
     setLoading(false)
-    console.log('breakpoint3', rows)
     
 }, []);
 
 const handleKeyDown= (e) => {
-    console.log(e)
     if(e.code === 'CapsLock'){
         setCapsLock(capsLock => !capsLock)
     }
@@ -71,13 +70,13 @@ const handleKeyUp= (e) => {
         return (
 
             shiftIsDown
-            ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex={-1}>
+            ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
                 {
                     rows_alt.map( (row, index) => <KeyBoardRow row={row}/>)
                 }
                </div>
             
-            : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex={-1}>
+            : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
             {
                 rows.map( (row, index) => <KeyBoardRow row={row}/>)
             }

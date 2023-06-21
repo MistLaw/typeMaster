@@ -5,8 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Root from "./routes/Root.jsx"
 import MainMenu from "./components/MainMenu.jsx";
-import Practice from "./routes/practice.jsx";
+import Practice from "./routes/Practice.jsx";
 import Tutorial from "./routes/Tutorial.jsx";
+import KeyBoard from "./components/KeyBoard.jsx";
 
 /*
 function render() {
@@ -19,7 +20,7 @@ render();
 const router = createBrowserRouter([
   {
     path: "/main_window",
-    element: <Root/>
+    element: <Practice/>
   },
   {
     path: "/practice",
