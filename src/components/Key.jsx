@@ -42,40 +42,52 @@ const Key = (props) => {
         "Tab" : Tab,
     }
 
-    const {generatedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
+    const {possible_chars, generatedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
 
     
     useEffect(()=>{
         window.addEventListener('keydown', handleKeyDown)
         window.addEventListener('keyup', handleKeyUp)
 
+        return ()=>{
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('keyup', handleKeyDown)
+        }
+
     },[])
 
 
     const handleKeyDown= (event)=>{
-
-
+        if(event.repeat){return}
         if(event.key === props.keychar || event.code === props.keychar){
-            console.log('event down localy recognized with key = ', props.keychar)
+            //console.log('event down localy recognized with key = ', props.keychar)
+
             if(! isDown){
-                setIsDown(isDown => true)
-                if(props.keychar === generatedChar){
-                    setIsCorrect(true)
-                    setLastKeyPressIsCorrect(true)
+
+                setIsDown((isDown) => true)
+                console.log('pressed : ', props.keychar, 'generatedChar : ', generatedChar)
+                if(props.keychar === generatedChar.current){
+                    console.log('went to true')
+                    setIsCorrect(()=>true)
+                    setLastKeyPressIsCorrect(()=>true)
+                    generatedChar.current = possible_chars[Math.floor(Math.random() * possible_chars.length)]
                 }
                 else{
-                    setIsCorrect(false)
-                    setLastKeyPressIsCorrect(false)
+                    console.log('went to false')
+                    setIsCorrect(()=>false)
+                    setLastKeyPressIsCorrect(()=>false)
                 }
+
             }
 
         }
+
     }
 
     const handleKeyUp= (event)=>{
         if(event.key === props.keychar || event.code === props.keychar){
-            console.log('event up localy recognized with key = ', props.keychar)
-            setIsDown(isDown => false)
+            //console.log('event up localy recognized with key = ', props.keychar)
+            setIsDown((isDown) => false)
         }
 
         
@@ -83,7 +95,6 @@ const Key = (props) => {
 
     return (
 
-        //TODO include the keycodes check as well when trying to add the special-key class
         //avoided nester ternary operator, might need to do it anyway so special keys dont get correct/incorrect classes
         <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
