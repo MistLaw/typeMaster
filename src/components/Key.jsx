@@ -82,6 +82,7 @@ const Key = (props) => {
     return (
 
         //TODO include the keycodes check as well when trying to add the special-key class
+        //avoided nester ternary operator, might need to do it anyway so special keys dont get correct/incorrect classes
         <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
             ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>

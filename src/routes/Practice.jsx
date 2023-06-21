@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, createContext } from 'react';
 import { GeneratedCharContext } from '../components/GeneratedCharContext.jsx';
 import KeyBoard from '../components/KeyBoard.jsx';
+import { Link } from 'react-router-dom';
 
 function Practice() {
     
@@ -15,6 +16,7 @@ function Practice() {
 
     return (
         <div className="main">
+            <Link className='BACK-MAIN-MENU' to={'/main_window'}>Back to Main Menu</Link>
             <div className="generated-char"> <p>{generatedChar}</p> </div>
             <GeneratedCharContext.Provider value={generatedChar}>
                 <KeyBoard/>
