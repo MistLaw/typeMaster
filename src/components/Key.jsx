@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, useCallback} from "react";
 import { PracticePageContext } from "./PracticePageContext.jsx";
 // svg assets
 import Backspace from '../../assets/special_keys_icons/Backspace.svg'
@@ -42,20 +42,9 @@ const Key = (props) => {
         "Tab" : Tab,
     }
 
-    const {possible_chars, generatedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
+    const {possible_chars, generatedChar,setGeneratedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
 
     
-    useEffect(()=>{
-        window.addEventListener('keydown', handleKeyDown)
-        window.addEventListener('keyup', handleKeyUp)
-
-        return ()=>{
-            window.removeEventListener('keydown', handleKeyDown)
-            window.removeEventListener('keyup', handleKeyDown)
-        }
-
-    },[])
-
 
     const handleKeyDown= (event)=>{
         if(event.repeat){return}
@@ -65,12 +54,11 @@ const Key = (props) => {
             if(! isDown){
 
                 setIsDown((isDown) => true)
-                console.log('pressed : ', props.keychar, 'generatedChar : ', generatedChar)
-                if(props.keychar === generatedChar.current){
+                if(props.keychar === generatedChar){
                     console.log('went to true')
                     setIsCorrect(()=>true)
                     setLastKeyPressIsCorrect(()=>true)
-                    generatedChar.current = possible_chars[Math.floor(Math.random() * possible_chars.length)]
+                    setGeneratedChar(()=>possible_chars[Math.floor(Math.random() * possible_chars.length)])
                 }
                 else{
                     console.log('went to false')
@@ -93,9 +81,21 @@ const Key = (props) => {
         
     }
 
+    // either dont get a dependency array at all and new event listeners will be attached everytime
+    // or add handleKeyUp as a dependency so it will attach the new handler to the listener
+    useEffect(()=>{
+        window.addEventListener('keydown', handleKeyDown)
+        window.addEventListener('keyup', handleKeyUp)
+        return ()=>{
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('keyup', handleKeyDown)
+        }
+
+    })
+
     return (
 
-        //avoided nester ternary operator, might need to do it anyway so special keys dont get correct/incorrect classes
+        //avoided nested ternary operator, might need to do it anyway so special keys dont get correct/incorrect classes
         <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
             ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>

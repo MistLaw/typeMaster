@@ -12,22 +12,20 @@ function Practice() {
     .concat(window.keyboard_layouts.ISO["alpha_numerics_alt"].map(row => row.split("")))
     .flat(1);
 
-    // on rerender this is being generated
-    const generatedChar = useRef(possible_chars[Math.floor(Math.random() * possible_chars.length)])
-
+    const [generatedChar, setGeneratedChar] = useState(possible_chars[Math.floor(Math.random() * possible_chars.length)])
     const [lastKeyPressIsCorrect, setLastKeyPressIsCorrect] = useState(null)
     return (
         <div className="main">
             <Link className='BACK-MAIN-MENU' to={'/main_window'}>Back to Main Menu</Link>
             <div className='generted-char-wrapper'>
-                <PracticePageContext.Provider value={{possible_chars, generatedChar, setLastKeyPressIsCorrect}}>
+                <PracticePageContext.Provider value={{possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect}}>
                         {
                             lastKeyPressIsCorrect === null 
                             ? <p className='keypress-feedback'>Press the key below !</p>
                             : lastKeyPressIsCorrect ?  <p className='keypress-feedback correct'>Great !</p>
                             : <p className='keypress-feedback incorrect'>Try again !</p>
                         }
-                    <div className="generated-char"> <p>{generatedChar.current}</p> </div>
+                    <div className="generated-char"> <p>{generatedChar}</p> </div>
                     <KeyBoard/>
                 </PracticePageContext.Provider>
             </div>
