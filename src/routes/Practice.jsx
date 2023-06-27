@@ -17,13 +17,13 @@ function Practice() {
     return (
         <div className="main">
             <Link className='BACK-MAIN-MENU' to={'/main_window'}>Back to Main Menu</Link>
-            <div className='generted-char-wrapper'>
+            <div className='generated-char-wrapper'>
                 <PracticePageContext.Provider value={{possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect}}>
                         {
                             lastKeyPressIsCorrect === null 
-                            ? <p className='keypress-feedback'>Press the key below !</p>
-                            : lastKeyPressIsCorrect ?  <p className='keypress-feedback correct'>Great !</p>
-                            : <p className='keypress-feedback incorrect'>Try again !</p>
+                            ? <div className='keypress-feedback'><p>{"Press the key below !"}</p></div>
+                            : lastKeyPressIsCorrect ?  <div className='keypress-feedback correct'><p>{"Great !"}</p></div>
+                            : <div className='keypress-feedback incorrect'><p>{"Try again !"}</p></div>
                         }
                     <div className="generated-char"> <p>{generatedChar}</p> </div>
                     <KeyBoard/>

@@ -99,7 +99,14 @@ const Key = (props) => {
         <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
             {(special_keys.includes(props.keychar)
             ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>
-            : props.keychar) }
+            : <p>{props.keychar}</p>) }
+
+            {(props.keychar === 'f' || props.keychar === 'F' || props.keychar === 'j' || props.keychar === 'J')
+            
+            ? <p>_</p>
+            : <></>
+            } 
+
         </div>
     );
 }

@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    margin: auto;
+    font-size: 1.25em;
   }
   
   .keyboardrow{
@@ -36,17 +36,25 @@
     
     border-style: solid;
     border-radius: .3em;
-    border-color: blue;
+    border-color: black;
     border-width: 1px;
+
+    background-color: lightsteelblue;
     text-align: center;
     padding: .3em;
-  
-    font-family: Geneva, sans-serif;
     font-weight: 500;
-  
     transition: all .001s linear;
   }
+
+  .key > p{
+    margin: 0;
+    text-align: center;
+    font-family: 'Courier New', sans-serif;
+    font-weight: 500;
+    margin-bottom: -0.8em;
+  }
   
+
   .key+.key{
     margin-left: .25em;
   
