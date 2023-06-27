@@ -14,21 +14,40 @@ function Practice() {
 
     const [generatedChar, setGeneratedChar] = useState(possible_chars[Math.floor(Math.random() * possible_chars.length)])
     const [lastKeyPressIsCorrect, setLastKeyPressIsCorrect] = useState(null)
+    const [numberKeyPresses, setNumberKeyPresses] = useState(0)
+    const [numberCorrectKeyPresses, setNumberCorrectKeyPresses] = useState(0)
+    
     return (
         <div className="main">
+
             <Link className='BACK-MAIN-MENU' to={'/main_window'}>Back to Main Menu</Link>
             <div className='generated-char-wrapper'>
-                <PracticePageContext.Provider value={{possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect}}>
+                
+                <PracticePageContext.Provider value={{
+                                                    possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
+                                                    numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses
+                                                    }}
+                >
+                        <div className='feedback-wrapper'>
                         {
                             lastKeyPressIsCorrect === null 
                             ? <div className='keypress-feedback'><p>{"Press the key below !"}</p></div>
                             : lastKeyPressIsCorrect ?  <div className='keypress-feedback correct'><p>{"Great !"}</p></div>
                             : <div className='keypress-feedback incorrect'><p>{"Try again !"}</p></div>
                         }
+
+                        {
+                            <div className='keypress-feedback'> <p>{numberCorrectKeyPresses}{"/"}{numberKeyPresses}</p> </div>
+                        }
+                        </div>
+
                     <div className="generated-char"> <p>{generatedChar}</p> </div>
+
                     <KeyBoard/>
+                
                 </PracticePageContext.Provider>
             </div>
+        
         </div>
     );
 }

@@ -51,6 +51,8 @@
     text-align: center;
     font-family: 'Courier New', sans-serif;
     font-weight: 500;
+    color: black;
+    text-shadow: wheat 0px 0px 2px;
     margin-bottom: -0.8em;
   }
   
@@ -84,7 +86,7 @@
     height: 1em;
   }
   .special-key-Space{
-    min-width: 12em;
+    min-width: 19.25em;
   }
   
   .special-key-CapsLock{
@@ -96,10 +98,13 @@
   }
   
   .special-key-Backspace{
-    width: 3em;
+    width: 4.75em;
   }
   
+  .special-key-Enter{
+    width: 2.75em;
+  }
   
   [class*="special-key-Shift"]{
-    width: 4em;
+    width: 4.5em;
   }

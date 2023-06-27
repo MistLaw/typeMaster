@@ -42,7 +42,11 @@ const Key = (props) => {
         "Tab" : Tab,
     }
 
-    const {possible_chars, generatedChar,setGeneratedChar, setLastKeyPressIsCorrect} = useContext(PracticePageContext)
+    const 
+        {
+            possible_chars, generatedChar,setGeneratedChar, setLastKeyPressIsCorrect,
+            numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses
+        } = useContext(PracticePageContext)
 
     
 
@@ -50,7 +54,7 @@ const Key = (props) => {
         if(event.repeat){return}
         if(event.key === props.keychar || event.code === props.keychar){
             //console.log('event down localy recognized with key = ', props.keychar)
-
+            setNumberKeyPresses((numberKeyPresses)=>numberKeyPresses+=1)
             if(! isDown){
 
                 setIsDown((isDown) => true)
@@ -59,6 +63,7 @@ const Key = (props) => {
                     setIsCorrect(()=>true)
                     setLastKeyPressIsCorrect(()=>true)
                     setGeneratedChar(()=>possible_chars[Math.floor(Math.random() * possible_chars.length)])
+                    setNumberCorrectKeyPresses((numberCorrectKeyPresses)=>numberCorrectKeyPresses+=1)
                 }
                 else{
                     console.log('went to false')
@@ -71,6 +76,7 @@ const Key = (props) => {
         }
 
     }
+
 
     const handleKeyUp= (event)=>{
         if(event.key === props.keychar || event.code === props.keychar){

@@ -23,6 +23,11 @@
     margin: auto;
 }
 
+.feedback-wrapper{
+  display: flex;
+  gap: 2em;
+}
+
 .generated-char-wrapper{
   display: flex;
   flex-direction: column;

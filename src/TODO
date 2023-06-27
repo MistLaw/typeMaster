@@ -1,6 +1,6 @@
--make shift keydown a variable shared between child components using react context, so u can render the components diffrent depending on wether shift is press or not.
+-make shift keydown a variable shared between child components using react context, so u can render the components diffrent depending on wether shift is press or not. [DONE]
 
-- account for left and right shift for the keydown even that triggers the alt characaters
+- account for left and right shift for the keydown even that triggers the alt characaters [DONE]
 
 -unpress all keys when alt tabbed, (reset to init state)
 
@@ -9,4 +9,12 @@
 
 - fix redundant onkeyDown
 
-- fix svg top bottom placement
+- fix svg top bottom placement [DONE]
+
+- fix handling of characters that appear twice in the keyboard ("\" and "|")
+
+- move setLastKeypressIsCorrect and setGeneratedChar to improve the interactivity right now it seems too abrubt the way a keystroke is judged immediately
+
+- add azerty support
+
+- handle caps lock (i almost never want it to be active it would be great to disable its effect completly else just notify the user to turn it off)
