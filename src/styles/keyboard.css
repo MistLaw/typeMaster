@@ -43,7 +43,7 @@
     text-align: center;
     padding: .3em;
     font-weight: 500;
-    transition: all .001s linear;
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
   }
 
   .key > p{
@@ -67,9 +67,12 @@
   }
   
   .active{
-    color: yellow;
+    transform: scale(1.1);
   }
 
+  .active > p{
+    color: teal;
+  }
   
   [class*='special-key']{
     min-width: 2em;
@@ -87,6 +90,7 @@
   }
   .special-key-Space{
     min-width: 19.25em;
+    justify-content: center;
   }
   
   .special-key-CapsLock{
@@ -105,6 +109,12 @@
     width: 2.75em;
   }
   
-  [class*="special-key-Shift"]{
-    width: 4.5em;
+
+  .special-key-ShiftRight{
+    width: 6.5em;
   }
+
+  .special-key-ShiftLeft{
+    width: 2.5em;
+  }
+

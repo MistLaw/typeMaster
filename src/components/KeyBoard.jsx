@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import KeyBoardRow from './KeyBoardRow.jsx'
 import '../styles/keyboard.css'
 
-const KeyBoard = () => {
+const KeyBoard = ({displayed_keys}) => {
     
     const [rows, setRows] = useState(window.keyboard_layouts.ISO["alpha_numerics"]) 
     const [rows_alt, setRowsAlt] = useState(window.keyboard_layouts.ISO["alpha_numerics_alt"])
@@ -20,8 +20,7 @@ const KeyBoard = () => {
     // i mean is there truly no better way to do this ? ...
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
-
-
+    
 
     // set main alpha numeric keys
     setRows( rows.map( (row, index)=>
@@ -42,6 +41,11 @@ const KeyBoard = () => {
     setRowsAlt(rows_alt => rows_alt.concat([window.keyboard_layouts.ISO["last_row"]]))
 
     setLoading(false)
+
+    return ()=>{
+        window.removeEventListener('keydown', handleKeyDown)
+        window.removeEventListener('keyup', handleKeyDown)
+    }
     
 }, []);
 
@@ -80,13 +84,13 @@ const handleKeyUp= (e) => {
             shiftIsDown
             ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
                 {
-                    rows_alt.map( (row, index) => <KeyBoardRow row={row}/>)
+                    rows_alt.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row}/>)
                 }
                </div>
             
             : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
             {
-                rows.map( (row, index) => <KeyBoardRow row={row}/>)
+                rows.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row}/>)
             }
            </div>
 

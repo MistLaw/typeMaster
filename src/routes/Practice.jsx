@@ -16,7 +16,13 @@ function Practice() {
     const [lastKeyPressIsCorrect, setLastKeyPressIsCorrect] = useState(null)
     const [numberKeyPresses, setNumberKeyPresses] = useState(0)
     const [numberCorrectKeyPresses, setNumberCorrectKeyPresses] = useState(0)
-    
+
+    const handleOnReset= (e)=>{
+        setNumberCorrectKeyPresses(0)
+        setNumberKeyPresses(0)
+        setLastKeyPressIsCorrect(null)
+    }
+
     return (
         <div className="main">
 
@@ -39,11 +45,13 @@ function Practice() {
                         {
                             <div className='keypress-feedback'> <p>{numberCorrectKeyPresses}{"/"}{numberKeyPresses}</p> </div>
                         }
+
+                            <div> <button className="reset-feedback" onClick={handleOnReset}>Reset</button> </div>
                         </div>
 
                     <div className="generated-char"> <p>{generatedChar}</p> </div>
 
-                    <KeyBoard/>
+                    <KeyBoard displayed_keys={"all"}/>
                 
                 </PracticePageContext.Provider>
             </div>

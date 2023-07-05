@@ -30,12 +30,14 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "electron": "25.0.1",
+    "electron-devtools-installer": "^3.2.0",
     "node-loader": "^2.0.0",
     "style-loader": "^3.3.3"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
+    "react-devtools": "^4.27.8",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.13.0"
   }
