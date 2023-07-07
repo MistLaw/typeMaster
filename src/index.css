@@ -80,3 +80,20 @@
 .key.incorrect{
   background-color: lightcoral;
 }
+
+#LeftIndex{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#finger_outline{
+  transition: transform 1s ease-in-out;
+}
+
+#finger_outline:hover{
+  
+  stroke: blue;
+
+}

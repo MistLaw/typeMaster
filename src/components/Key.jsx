@@ -50,13 +50,24 @@ const Key = (props) => {
 
     
 
+
+    // return finger thats assigned to the key
+    const assigned_finger = (keychar) =>{
+
+    for (const [key, assigned_characters] of Object.entries(window.keyboard_layouts.ISO["finger_mapping"])){
+        if(assigned_characters.includes(keychar)){
+            return key;
+        }
+    }
+}
+
     const handleKeyDown= (event)=>{
         if(event.repeat){return}
         if(event.key === props.keychar || event.code === props.keychar){
             //console.log('event down localy recognized with key = ', props.keychar)
             setNumberKeyPresses((numberKeyPresses)=>numberKeyPresses+=1)
             if(! isDown){
-
+                console.log(assigned_finger(props.keychar))
                 setIsDown((isDown) => true)
                 if(props.keychar === generatedChar){
                     console.log('went to true')
@@ -102,7 +113,7 @@ const Key = (props) => {
     return (
 
         //avoided nested ternary operator, might need to do it anyway so special keys dont get correct/incorrect classes
-        <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")}>
+        <div className={"key"+ (isDown? " active" + (isCorrect? " correct" : " incorrect") : "") + (special_keys.includes(props.keychar)? " special-key-"+props.keychar : "")} id={props.keychar}>
             {(special_keys.includes(props.keychar)
             ? <div className="special-key-wrapper"> <img src={special_keys_icons[props.keychar]}/> </div>
             : <p>{props.keychar}</p>) }

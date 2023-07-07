@@ -2,14 +2,14 @@ import React, {useState, useEffect} from "react";
 import KeyBoardRow from './KeyBoardRow.jsx'
 import '../styles/keyboard.css'
 
+import Finger from './svg/Finger.jsx'
+
 const KeyBoard = ({displayed_keys}) => {
     
     const [rows, setRows] = useState(window.keyboard_layouts.ISO["alpha_numerics"]) 
     const [rows_alt, setRowsAlt] = useState(window.keyboard_layouts.ISO["alpha_numerics_alt"])
     const [loading, setLoading] = useState(true)
-    
     // TODO: instead of assuming initial false, check if the system has it enabled or not, most likely using a library
-    //TODO center the inner components of Keyboard, the outer div gets centered fine but the keys dont
     // ISSUE: the characters key event generate dont take into account wether caps lock is on
     // maybe store both normal and alt values in the same component
     const [capsLock, setCapsLock] = useState(false)
@@ -39,6 +39,7 @@ const KeyBoard = ({displayed_keys}) => {
 )
 )
     setRowsAlt(rows_alt => rows_alt.concat([window.keyboard_layouts.ISO["last_row"]]))
+    
 
     setLoading(false)
 
@@ -72,7 +73,18 @@ const handleKeyUp= (e) => {
     if(e.code ==='ShiftRight'){
         setShiftIsDown(shiftIsDown => false)
     }
+
+    //moving finger icons to corresponding key
+    var pressedKey = document.getElementById(e.code) || document.getElementById(e.key)
+    var pressed_key_bounding_box = pressedKey.getBoundingClientRect()
+
+    var keyboard_wrapper_bounding_box = document.getElementById("keyboard").getBoundingClientRect()
+    var finger = document.getElementById("finger_outline")
+    finger.setAttribute("transform", "translate(" + (pressed_key_bounding_box.left - keyboard_wrapper_bounding_box.left) + "," + (pressed_key_bounding_box.top - keyboard_wrapper_bounding_box.top) + ")")
+
+
 }
+
 
 
     if(loading){
@@ -82,15 +94,16 @@ const handleKeyUp= (e) => {
         return (
 
             shiftIsDown
-            ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
+            ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} id="keyboard">
                 {
-                    rows_alt.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row}/>)
+                    rows_alt.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)
                 }
                </div>
             
-            : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
+            : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} id="keyboard">
+            <Finger/>
             {
-                rows.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row}/>)
+                rows.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)
             }
            </div>
 
