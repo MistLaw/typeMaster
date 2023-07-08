@@ -16,6 +16,7 @@ import AltRight from '../../assets/special_keys_icons/AltRight.svg'
 
 // style
 import '../styles/keyboard.css'
+import moveKeyById from "../controllers/moveKeyById.js";
 
 const Key = (props) => {
 
@@ -43,10 +44,11 @@ const Key = (props) => {
     }
 
     const 
-        {
-            possible_chars, generatedChar,setGeneratedChar, setLastKeyPressIsCorrect,
-            numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses
-        } = useContext(PracticePageContext)
+    {
+        possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
+        numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
+        key_set, setKeySet,shiftIsDown, setShiftIsDown, last_position, setLastPosition
+        }= useContext(PracticePageContext)
 
     
 
@@ -63,11 +65,19 @@ const Key = (props) => {
 
     const handleKeyDown= (event)=>{
         if(event.repeat){return}
+        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+            setKeySet(window.iso_qwerty.rows_alt)
+        }
         if(event.key === props.keychar || event.code === props.keychar){
             //console.log('event down localy recognized with key = ', props.keychar)
             setNumberKeyPresses((numberKeyPresses)=>numberKeyPresses+=1)
             if(! isDown){
-                console.log(assigned_finger(props.keychar))
+                console.log('assigned finger: ',assigned_finger(props.keychar))
+                let assigned_finger_v = assigned_finger(props.keychar)
+                //moveKeyById(assigned_finger(props.keychar), props.keychar,"keyboard")
+                setLastPosition((last_position)=> {
+                    console.log("assignation object: ", {assigned_finger_v: props.keychar })
+                    return ({...last_position, ...{[assigned_finger_v]: props.keychar }})})
                 setIsDown((isDown) => true)
                 if(props.keychar === generatedChar){
                     console.log('went to true')
@@ -90,6 +100,11 @@ const Key = (props) => {
 
 
     const handleKeyUp= (event)=>{
+
+        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+            setKeySet(window.iso_qwerty.rows)
+        }
+
         if(event.key === props.keychar || event.code === props.keychar){
             //console.log('event up localy recognized with key = ', props.keychar)
             setIsDown((isDown) => false)

@@ -97,3 +97,12 @@
   stroke: blue;
 
 }
+
+.finger{
+  position: absolute;
+  transition: transform 1s ease-in-out;
+}
+
+#RightThumb{
+  left: 10em;
+}

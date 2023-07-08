@@ -1,56 +1,48 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
+import { PracticePageContext } from "./PracticePageContext.jsx";
 import KeyBoardRow from './KeyBoardRow.jsx'
 import '../styles/keyboard.css'
 
 import Finger from './svg/Finger.jsx'
 
+import LeftIndex from './svg/LeftIndex.jsx'
+import RightIndex from './svg/RightIndex.jsx'
+import LeftMiddle from './svg/LeftMiddle.jsx'
+import RightMiddle from './svg/RightMiddle.jsx'
+import LeftRing from './svg/LeftRing.jsx'
+import RightRing from './svg/RightRing.jsx'
+import LeftPinky from './svg/LeftPinky.jsx'
+import RightPinky from './svg/RightPinky.jsx'
+import LeftThumb from './svg/LeftThumb.jsx'
+import RightThumb from './svg/RightThumb.jsx'
+
+import moveKeyById from "../controllers/moveKeyById.js";
+
 const KeyBoard = ({displayed_keys}) => {
     
-    const [rows, setRows] = useState(window.keyboard_layouts.ISO["alpha_numerics"]) 
-    const [rows_alt, setRowsAlt] = useState(window.keyboard_layouts.ISO["alpha_numerics_alt"])
+    //const [rows, setRows] = useState(window.keyboard_layouts.ISO["alpha_numerics"]) 
+    //const [rows_alt, setRowsAlt] = useState(window.keyboard_layouts.ISO["alpha_numerics_alt"])
     const [loading, setLoading] = useState(true)
     // TODO: instead of assuming initial false, check if the system has it enabled or not, most likely using a library
     // ISSUE: the characters key event generate dont take into account wether caps lock is on
     // maybe store both normal and alt values in the same component
     const [capsLock, setCapsLock] = useState(false)
-    const [shiftIsDown, setShiftIsDown] = useState(false)
-    
-    useEffect(()=>{
 
-    // i mean is there truly no better way to do this ? ...
-    window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('keyup', handleKeyUp)
-    
 
-    // set main alpha numeric keys
-    setRows( rows.map( (row, index)=>
-        window.keyboard_layouts.ISO["special_keys_first"][index]
-        .concat(row.split(""))
-        .concat(window.keyboard_layouts.ISO["special_keys_last"][index])
-    )
-    )
-    setRows(rows => rows.concat([window.keyboard_layouts.ISO["last_row"]]))
-    
-    // set alternate alpha numeric keys, triggered by caps lock or shift
-    setRowsAlt( rows_alt.map( (row, index)=>
-    window.keyboard_layouts.ISO["special_keys_first"][index]
-    .concat(row.split(""))
-    .concat(window.keyboard_layouts.ISO["special_keys_last"][index])
-)
-)
-    setRowsAlt(rows_alt => rows_alt.concat([window.keyboard_layouts.ISO["last_row"]]))
+    const 
+    {
+        possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
+        numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
+        key_set, setKeySet,shiftIsDown, setShiftIsDown,last_position, setLastPosition
+        } = useContext(PracticePageContext)
+
+    //var rows = window.iso_qwerty.rows
+    //var rows_alt = window.iso_qwerty.rows_alt
     
 
-    setLoading(false)
-
-    return ()=>{
-        window.removeEventListener('keydown', handleKeyDown)
-        window.removeEventListener('keyup', handleKeyDown)
-    }
-    
-}, []);
-
-const handleKeyDown= (e) => {
+const handleKeyDownKeyboard= (e) => {
+    e.stopPropagation()
+    console.log('caught keydown event in keyboard: ', e.code)
     if(e.code === 'CapsLock'){
         setCapsLock(capsLock => !capsLock)
     }
@@ -64,7 +56,7 @@ const handleKeyDown= (e) => {
     }
 }
 
-const handleKeyUp= (e) => {
+const handleKeyUpKeyboard= (e) => {
 
     if(e.code ==='ShiftLeft'){
         setShiftIsDown(shiftIsDown => false)
@@ -74,6 +66,7 @@ const handleKeyUp= (e) => {
         setShiftIsDown(shiftIsDown => false)
     }
 
+    /*
     //moving finger icons to corresponding key
     var pressedKey = document.getElementById(e.code) || document.getElementById(e.key)
     var pressed_key_bounding_box = pressedKey.getBoundingClientRect()
@@ -81,9 +74,38 @@ const handleKeyUp= (e) => {
     var keyboard_wrapper_bounding_box = document.getElementById("keyboard").getBoundingClientRect()
     var finger = document.getElementById("finger_outline")
     finger.setAttribute("transform", "translate(" + (pressed_key_bounding_box.left - keyboard_wrapper_bounding_box.left) + "," + (pressed_key_bounding_box.top - keyboard_wrapper_bounding_box.top) + ")")
-
+    */
 
 }
+
+
+useEffect(()=>{
+
+    // i mean is there truly no better way to do this ? ...
+    //window.addEventListener('keydown', handleKeyDownKeyboard)
+    //window.addEventListener('keyup', handleKeyUpKeyboard)
+    
+
+            //set fingers at proper initial positions
+    moveKeyById("LeftIndex", last_position["LeftIndex"], "keyboard")
+    moveKeyById("RightIndex",last_position["RightIndex"],"keyboard")
+    moveKeyById("LeftMiddle",last_position["LeftMiddle"],"keyboard")
+    moveKeyById("RightMiddle",last_position["RightMiddle"],"keyboard")
+    moveKeyById("LeftRing",last_position["LeftRing"],"keyboard")
+    moveKeyById("RightRing",last_position["RightRing"],"keyboard")
+    moveKeyById("LeftPinky",last_position["LeftPinky"],"keyboard")
+    moveKeyById("RightPinky",last_position["RightPinky"],"keyboard")
+    moveKeyById("LeftThumb",last_position["LeftThumb"],"keyboard")
+    moveKeyById("RightThumb",last_position["RightThumb"],"keyboard")
+
+    
+    setLoading(false)
+    /*return ()=>{
+        window.removeEventListener('keydown', handleKeyDownKeyboard)
+        window.removeEventListener('keyup', handleKeyDownKeyboard)
+    }*/
+    
+});
 
 
 
@@ -93,19 +115,24 @@ const handleKeyUp= (e) => {
     else{
         return (
 
-            shiftIsDown
-            ? <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} id="keyboard">
-                {
-                    rows_alt.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)
-                }
-               </div>
+            <div className="keyboard" id="keyboard">
             
-            : <div className="keyboard" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} id="keyboard">
-            <Finger/>
+            <LeftIndex/>
+            <RightIndex/>
+            <LeftMiddle/>
+            <RightMiddle/>
+            <LeftRing/>
+            <RightRing/>
+            <LeftPinky/>
+            <RightPinky/>
+            <LeftThumb/>
+            <RightThumb/>
+
             {
-                rows.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)
+                key_set.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)
             }
-           </div>
+            </div>
+
 
         );
     }

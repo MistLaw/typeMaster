@@ -16,6 +16,23 @@ function Practice() {
     const [lastKeyPressIsCorrect, setLastKeyPressIsCorrect] = useState(null)
     const [numberKeyPresses, setNumberKeyPresses] = useState(0)
     const [numberCorrectKeyPresses, setNumberCorrectKeyPresses] = useState(0)
+    const [key_set, setKeySet] = useState(window.iso_qwerty.rows)
+    const [shiftIsDown, setShiftIsDown] = useState(false)
+
+    const [last_position, setLastPosition] = useState({
+        "LeftIndex":"f",
+        "RightIndex":"j",
+        "LeftMiddle":"d",
+        "RightMiddle":"k",
+        "LeftRing":"s",
+        "RightRing":"l",
+        "LeftPinky":";",
+        "RightPinky":"a",
+        "LeftThumb":"Space",
+        "RightThumb":"Space",
+        
+    })
+
 
     const handleOnReset= (e)=>{
         setNumberCorrectKeyPresses(0)
@@ -31,7 +48,8 @@ function Practice() {
                 
                 <PracticePageContext.Provider value={{
                                                     possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
-                                                    numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses
+                                                    numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
+                                                    key_set, setKeySet, shiftIsDown, setShiftIsDown, last_position, setLastPosition
                                                     }}
                 >
                         <div className='feedback-wrapper'>
