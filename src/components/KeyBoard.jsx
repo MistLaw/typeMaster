@@ -33,7 +33,15 @@ const KeyBoard = ({displayed_keys}) => {
     {
         possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
         numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
-        key_set, setKeySet,shiftIsDown, setShiftIsDown,last_position, setLastPosition
+        key_set, setKeySet,shiftIsDown, setShiftIsDown,last_position, setLastPosition,
+
+        LeftIndexTimeRef,RightIndexTimeRef,LeftMiddleTimeRef,
+        RightMiddleTimeRef,LeftRingTimeRef,RightRingTimeRef,
+        LeftPinkyTimeRef,RightPinkyTimeRef,LeftThumbTimeRef,
+        RightThumbTimeRef,
+
+        original_positions
+
         } = useContext(PracticePageContext)
 
     //var rows = window.iso_qwerty.rows
@@ -86,7 +94,7 @@ useEffect(()=>{
     //window.addEventListener('keyup', handleKeyUpKeyboard)
     
 
-            //set fingers at proper initial positions
+    //set fingers at proper initial positions
     moveKeyById("LeftIndex", last_position["LeftIndex"], "keyboard")
     moveKeyById("RightIndex",last_position["RightIndex"],"keyboard")
     moveKeyById("LeftMiddle",last_position["LeftMiddle"],"keyboard")
@@ -97,6 +105,7 @@ useEffect(()=>{
     moveKeyById("RightPinky",last_position["RightPinky"],"keyboard")
     moveKeyById("LeftThumb",last_position["LeftThumb"],"keyboard")
     moveKeyById("RightThumb",last_position["RightThumb"],"keyboard")
+
 
     
     setLoading(false)

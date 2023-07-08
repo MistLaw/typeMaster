@@ -101,6 +101,8 @@
 .finger{
   position: absolute;
   transition: transform 1s ease-in-out;
+  opacity: 0.75;
+  z-index: 1;
 }
 
 #RightThumb{

@@ -18,3 +18,8 @@
 - add azerty support
 
 - handle caps lock (i almost never want it to be active it would be great to disable its effect completly else just notify the user to turn it off)
+
+-refactor context : 
+    -fingers context.
+    -keyboard context.
+    -practice page context.

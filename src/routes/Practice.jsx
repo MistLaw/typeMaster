@@ -19,19 +19,32 @@ function Practice() {
     const [key_set, setKeySet] = useState(window.iso_qwerty.rows)
     const [shiftIsDown, setShiftIsDown] = useState(false)
 
-    const [last_position, setLastPosition] = useState({
+    const LeftIndexTimeRef = useRef(0)
+    const RightIndexTimeRef = useRef(0)
+    const LeftMiddleTimeRef = useRef(0)
+    const RightMiddleTimeRef = useRef(0)
+    const LeftRingTimeRef = useRef(0)
+    const RightRingTimeRef = useRef(0)
+    const LeftPinkyTimeRef = useRef(0)
+    const RightPinkyTimeRef = useRef(0)
+    const LeftThumbTimeRef = useRef(0)
+    const RightThumbTimeRef = useRef(0)
+    
+    const original_positions= {
         "LeftIndex":"f",
         "RightIndex":"j",
         "LeftMiddle":"d",
         "RightMiddle":"k",
         "LeftRing":"s",
         "RightRing":"l",
-        "LeftPinky":";",
-        "RightPinky":"a",
+        "LeftPinky":"a",
+        "RightPinky":";",
         "LeftThumb":"Space",
         "RightThumb":"Space",
         
-    })
+    }
+
+    const [last_position, setLastPosition] = useState(original_positions)
 
 
     const handleOnReset= (e)=>{
@@ -49,7 +62,15 @@ function Practice() {
                 <PracticePageContext.Provider value={{
                                                     possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
                                                     numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
-                                                    key_set, setKeySet, shiftIsDown, setShiftIsDown, last_position, setLastPosition
+                                                    key_set, setKeySet, shiftIsDown, setShiftIsDown, last_position, setLastPosition,
+                                                    
+                                                    LeftIndexTimeRef,RightIndexTimeRef,LeftMiddleTimeRef,
+                                                    RightMiddleTimeRef,LeftRingTimeRef,RightRingTimeRef,
+                                                    LeftPinkyTimeRef,RightPinkyTimeRef,LeftThumbTimeRef,
+                                                    RightThumbTimeRef,
+
+                                                    original_positions
+
                                                     }}
                 >
                         <div className='feedback-wrapper'>

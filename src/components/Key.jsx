@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, useCallback} from "react";
+import React, {useState, useEffect, useContext, useCallback, useRef} from "react";
 import { PracticePageContext } from "./PracticePageContext.jsx";
 // svg assets
 import Backspace from '../../assets/special_keys_icons/Backspace.svg'
@@ -47,11 +47,17 @@ const Key = (props) => {
     {
         possible_chars, generatedChar, setGeneratedChar, setLastKeyPressIsCorrect,
         numberKeyPresses, setNumberKeyPresses, numberCorrectKeyPresses, setNumberCorrectKeyPresses,
-        key_set, setKeySet,shiftIsDown, setShiftIsDown, last_position, setLastPosition
+        key_set, setKeySet,shiftIsDown, setShiftIsDown, last_position, setLastPosition,
+
+        LeftIndexTimeRef,RightIndexTimeRef,LeftMiddleTimeRef,
+        RightMiddleTimeRef,LeftRingTimeRef,RightRingTimeRef,
+        LeftPinkyTimeRef,RightPinkyTimeRef,LeftThumbTimeRef,
+        RightThumbTimeRef,
+
+        original_positions
         }= useContext(PracticePageContext)
 
     
-
 
     // return finger thats assigned to the key
     const assigned_finger = (keychar) =>{
@@ -62,6 +68,9 @@ const Key = (props) => {
         }
     }
 }
+
+    var finger_reset_timeout_id = null
+    const finger_reset_timeout_idRef = useRef(0)
 
     const handleKeyDown= (event)=>{
         if(event.repeat){return}
@@ -74,9 +83,7 @@ const Key = (props) => {
             if(! isDown){
                 console.log('assigned finger: ',assigned_finger(props.keychar))
                 let assigned_finger_v = assigned_finger(props.keychar)
-                //moveKeyById(assigned_finger(props.keychar), props.keychar,"keyboard")
                 setLastPosition((last_position)=> {
-                    console.log("assignation object: ", {assigned_finger_v: props.keychar })
                     return ({...last_position, ...{[assigned_finger_v]: props.keychar }})})
                 setIsDown((isDown) => true)
                 if(props.keychar === generatedChar){
@@ -85,12 +92,23 @@ const Key = (props) => {
                     setLastKeyPressIsCorrect(()=>true)
                     setGeneratedChar(()=>possible_chars[Math.floor(Math.random() * possible_chars.length)])
                     setNumberCorrectKeyPresses((numberCorrectKeyPresses)=>numberCorrectKeyPresses+=1)
+                    
                 }
                 else{
                     console.log('went to false')
                     setIsCorrect(()=>false)
                     setLastKeyPressIsCorrect(()=>false)
                 }
+                
+                clearTimeout(finger_reset_timeout_idRef.current)
+                // reset timer on keypress
+                finger_reset_timeout_idRef.current = setTimeout(() => {
+                    setLastPosition((last_position)=>{
+                    return {
+                        ...last_position, ...{[assigned_finger_v] :original_positions[[assigned_finger_v]]}
+                    }
+                    })
+                    }, 3000);
 
             }
 
