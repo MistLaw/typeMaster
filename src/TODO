@@ -23,3 +23,6 @@
     -fingers context.
     -keyboard context.
     -practice page context.
+
+
+-apparently can use multiple effects in the same component, should be able to have 1 that only runs at first render and another that updates using dependencies.

@@ -126,16 +126,16 @@ useEffect(()=>{
 
             <div className="keyboard" id="keyboard">
             
-            <LeftIndex/>
-            <RightIndex/>
-            <LeftMiddle/>
-            <RightMiddle/>
-            <LeftRing/>
-            <RightRing/>
-            <LeftPinky/>
-            <RightPinky/>
-            <LeftThumb/>
-            <RightThumb/>
+            <LeftIndex blink={true}/>
+            <RightIndex blink={true}/>
+            <LeftMiddle blink={true}/>
+            <RightMiddle blink={true}/>
+            <LeftRing blink={true}/>
+            <RightRing blink={true}/>
+            <LeftPinky blink={true}/>
+            <RightPinky blink={true}/>
+            <LeftThumb blink={true}/>
+            <RightThumb blink={true}/>
 
             {
                 key_set.map( (row, index) => <KeyBoardRow displayed_keys={displayed_keys} row={row} />)

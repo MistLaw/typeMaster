@@ -108,3 +108,20 @@
 #RightThumb{
   left: 10em;
 }
+
+
+.blink{
+animation: blink ease-in-out 1.5s infinite;
+}
+
+@keyframes blink {
+  0%{
+    opacity: 0.8;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0.8;
+  }
+}
