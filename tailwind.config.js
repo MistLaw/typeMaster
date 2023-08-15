@@ -9,9 +9,8 @@ module.exports = {
       secondary: '#F8DE22',
       accent: '#F94C10',
       background: '#EAC696'
-    },  
+    },
     extend: {},
   },
   plugins: [],
 }
-
