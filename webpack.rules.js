@@ -10,10 +10,15 @@ module.exports = [
       }
     }
   },
-  
+
   {
     test: /\.(png|jp(e*)g|svg|gif)$/,
     type: "asset/resource",
+  },
+
+  {
+    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+    type: 'asset/resource',
   },
   // ... existing loader config ...
 ]

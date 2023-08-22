@@ -1,8 +1,8 @@
 {
-  "name": "first-app",
-  "productName": "first-app",
+  "name": "type-master",
+  "productName": "type-master",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Touch typing app to practice diffrent profiles (coding keys, diffrent keyboard layouts...etc)",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

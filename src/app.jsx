@@ -2,7 +2,10 @@
 import React, { Children, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import './index.css'
+import './Jost.ttf'
+
 import Root from "./routes/Root.jsx"
 import MainMenu from "./components/MainMenu.jsx";
 import Practice from "./routes/Practice.jsx";

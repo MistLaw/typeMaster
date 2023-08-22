@@ -10,7 +10,14 @@ module.exports = {
       accent: '#F94C10',
       background: '#EAC696'
     },
-    extend: {},
+    fontFamily:{
+      'jost': ['Jost'],
+    },
+    extend: {
+      boxShadow: {
+        'surround': '0px 0px 7px'
+      },
+    },
   },
   plugins: [],
 }
